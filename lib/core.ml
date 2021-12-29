@@ -301,11 +301,15 @@ let match_str ~groups ~partial re s ~pos ~len =
           [||] }
   in
   let initial_cat =
+    (*
     if pos = 0 then
-      Category.(search_boundary ++ inexistant)
+    *)
+    Category.(search_boundary ++ inexistant)
+      (*
     else
       Category.(search_boundary
                 ++ category re ~color:(get_color re s (pos - 1)))
+      *)
   in
   let initial_state = find_initial_state re initial_cat in
   let st = scan_str info s initial_state ~groups in
@@ -314,10 +318,14 @@ let match_str ~groups ~partial re s ~pos ~len =
       Automata.status st.desc
     else
       let final_cat =
+        (*
         if last = slen then
-          Category.(search_boundary ++ inexistant)
+        *)
+        Category.(search_boundary ++ inexistant)
+          (*
         else
           Category.(search_boundary ++ category re ~color:(get_color re s last))
+          *)
       in
       let (idx, res) = final info st final_cat in
       if groups then info.positions.(idx) <- last + 1;
